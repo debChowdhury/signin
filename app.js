@@ -1,6 +1,6 @@
 require('dotenv').config();
 
-var createError = require('http-errors');
+//var createError = require('http-errors');
 var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
@@ -11,6 +11,7 @@ var SQLiteStore = require('connect-sqlite3')(session);
 var indexRouter = require('./routes/index');
 var authRouter = require('./routes/auth');
 var app = express();
+const port = 3000;
 
 app.locals.pluralize = require('pluralize');
 
@@ -47,5 +48,13 @@ app.use('/', authRouter);
 //   res.status(err.status || 500);
 //   res.render('error');
 // });
+app.listen(port, function(err){
+  console.log(err);
+  if(err){
+      console.log("Error in running server");
+      return;
+  }
+  console.log(`Server running at port ${port}`);
+});
 
 module.exports = app;
